@@ -1,0 +1,458 @@
+html, body{
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+header{
+	height: 50px;
+	overflow: hidden;
+}
+
+body section{
+	background: url(images/wild_oliva.png);
+}
+
+.animate{
+	transition: all .3s ease-in-out;
+}
+
+.left{float: left;}
+.right{float: right;}
+
+nav{
+	position: relative;
+	background: black;
+	color:white;
+	height: 50px;
+	z-index: 102;
+}
+
+nav .right{
+	margin-right: 20px;
+}
+
+nav .right div{
+	margin-right:10px;
+}
+
+.logo{
+	margin-left: 20px;
+}
+
+.logo img{
+	width:100px;
+}
+
+.social{
+	margin-top: 12.5px;
+	height: 25px;	
+	width: 25px;
+}
+
+.social a{
+	float: left;
+	
+	width: 25px;
+	height: 25px;
+}
+
+nav a:active{
+
+	-webkit-transform: translateZ(0) scale(0.95);
+	-moz-transform: translateZ(0) scale(0.95);
+	-ms-transform: translateZ(0) scale(0.95);
+}
+
+.twitter a{
+	background: url(images/twitter.png);
+	background-size: 25px;
+}
+
+.twitter a:hover{
+	background: url(images/twitter-active.png);
+	background-size: 25px;
+}
+
+.facebook a{
+	background: url(images/facebook.png);
+	background-size: 25px;
+}
+
+.facebook a:hover{
+	background: url(images/facebook-active.png);
+	background-size: 25px;
+}
+
+.login-register, .try{
+	background: #5ccb24;
+	margin-top: 12.5px;
+	line-height: 25px;
+	height: 25px;
+	font-family: Verdana;
+	font-weight: bold;
+	font-size: 12px;
+	padding: 0px 5px;
+	color: white;
+	text-decoration: none;
+}
+
+.login-area{
+	background: rgb(26, 26, 26);
+	position: absolute;
+	width: 100%;
+	height: 250px;
+	top:-250px;
+	z-index: 101;
+}
+
+.login-area.active{
+	top:50px;
+}
+
+.login-area .login{
+	height: 100%;
+	width: 50%;
+}
+
+.login-area .register{
+	height: 100%;
+	width: 50%;
+}
+
+.login-area fieldset{
+	border: none;
+	color: white;
+	font-family: Verdana;
+	width: 350px;
+}
+
+.login-area legend{
+	position: relative;
+	margin-bottom: 20px;
+	top: 10px;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.login-area label{
+	font-size: 15px;
+}
+
+.input-row{
+	width: 100%;
+}
+
+button{
+	position: relative;
+	background: #5ccb24;
+	color: white;
+	font-family: Verdana;
+	font-weight: bold;
+	border: none;
+	margin: 0 auto;
+	top: 20px;
+	padding: 5px 7px;
+	display: block;
+}
+
+button:active{
+	-webkit-transform: translateZ(0) scale(0.95);
+	-moz-transform: translateZ(0) scale(0.95);
+	-ms-transform: translateZ(0) scale(0.95);
+}
+
+section{
+	overflow: hidden;
+	height: 85%;
+	width: 100%;
+}
+
+.slider, .slide{
+	height:100%;
+	width: 100%;
+
+	background: url(images/wild_oliva.png);
+}
+
+.pager{
+	position: absolute;
+	top: 35%;
+	right: 2%;
+	width: 25px;
+	z-index: 100;
+}
+
+.pager span{
+	background: url(images/bullet-inactive.png);
+	background-size: 20px;
+	background-repeat: no-repeat;
+	height: 30px;
+	width: 30px;
+	float: left;
+	opacity: 0.85;
+}
+
+.pager .cycle-pager-active{
+	background: url(images/bullet-active.png);
+	background-size: 20px;
+	background-repeat: no-repeat;
+}
+
+footer{
+	background: black;
+	height: calc(100% - (85% + 50px) );
+	color:white;
+	font-family: Verdana;
+	font-size: 15px;
+	line-height: 50px;
+	text-align: center;
+}
+
+.left{
+	float:left;
+}
+
+.right{
+	float:right;
+}
+
+/*App*/
+
+
+/*Menu*/
+
+.menu{
+	background: rgb(13, 189, 13);
+	width: 250px;
+	margin-top: 100px;
+	position: relative;
+	left:0;
+
+	transition: all .5s ease-in-out; 
+	-webkit-transform: perspective(900px) rotateY(0deg) translateZ(0px) translateX(0px);
+	-moz-transform: perspective(900px) rotateY(0deg) translateZ(0px) translateX(0px);
+	-ms-transform: perspective(900px) rotateY(0deg) translateZ(0px) translateX(0px);
+}
+
+.menu ul, .menu li {
+	padding: 0; 
+	margin: 0;
+	list-style: none;
+	cursor: pointer;
+}
+
+
+.menu .submenu-inactive {
+	background: rgb(15, 134, 15);
+	position: absolute;
+	width: 250px;
+	top: 0;
+	left: 250px;
+	visibility: hidden;
+	opacity: 0;
+
+	transition: all .5s ease-in-out;
+	-webkit-transform: perspective(900px) rotateY(60deg);
+	-webkit-transform-origin: 0;
+	-moz-transform: perspective(900px) rotateY(60deg);
+	-moz-transform-origin: 0;
+	-ms-transform: perspective(900px) rotateY(60deg);
+	-ms-transform-origin: 0;
+}
+
+.menu .submenu-active {
+	background: rgb(13, 189, 13);
+
+	opacity: 1;
+	visibility: visible;
+
+	-webkit-transform: perspective(900px) rotateY(0deg);
+	-moz-transform: perspective(900px) rotateY(0deg);
+	-ms-transform: perspective(900px) rotateY(0deg);
+}
+
+.slide-left{ 
+	background: rgb(15, 134, 15);
+	left:-250px; 
+}
+
+.menu li {
+	background: url(images/arrow.png) no-repeat;
+	background-size: 7px;
+	background-position: 230px;
+
+	color:white;
+	font-family: Verdana;
+	font-size: 13px;
+	font-weight: bold;
+	
+	text-indent: 15px;
+
+	padding: 15px 0;
+
+	width: 100%;
+
+	transition: all .3s ease-in-out; 
+}
+
+.menu li:hover{
+	background: rgba(0, 0, 0, 0.1) url(images/arrow.png) no-repeat;
+	background-size: 7px;
+	background-position: 230px;
+}
+
+.menu .back-btn{ 
+	background: url(images/back-arrow.png) no-repeat;
+	background-size: 7px;
+	background-position: 230px;
+}
+
+.menu .back-btn:hover{ 
+	background: rgba(0, 0, 0, 0.1) url(images/back-arrow.png) no-repeat; 
+	background-size: 7px;
+	background-position: 230px;
+}
+
+.menu-wrapper{
+	float: left;
+}
+
+ul > li:first-child{ border-top: 5px solid #24700C; }
+
+.sub-menu{
+	border-top: 5px solid #24700C;
+}
+
+/*End of Menu*/
+
+/*DrawBoard*/
+
+#draw-board{
+	position: relative;
+	float: left;
+	top:100px;
+	
+	width: calc(100% - 250px);
+	height: 100%;
+
+}
+
+#canvas{
+	background: white;
+	border-top: 5px solid #24700C;
+	margin:0 auto; 
+	/* height: 100%;
+	width: 100%;  */
+	position: absolute;
+	left:0;
+	right:0; 
+}
+
+.canvas-container{
+	margin:0 auto;
+	/* height: 80%;
+	 width: 80%; */ 
+	position: absolute;
+	left:0;
+	right:0;
+}
+
+/*END of Drawboard*/
+
+/*Options Menu*/
+
+#options-menu{
+	background: rgb(13, 189, 13);
+
+	color:white;
+	cursor: default;
+	font-family: Verdana;
+	font-size: 13px;
+	font-weight: normal;
+	text-indent: 0px;
+	padding: 0;
+}
+
+#options-menu > *{
+	margin: 10px;
+}
+
+.dummy-bgLoader, .dummy-imgLoader {
+	width: 91%;
+}
+
+.dummy-bgLoader label, .dummy-imgLoader label{
+	margin-top: 2px;		
+}
+
+.dummy-bgLoader #bg-path, .dummy-imgLoader #img-path{
+	width: 90px;
+	border:none;
+	text-align: center;
+}
+
+#options-menu .file-wrapper, #image-menu .file-wrapper{
+	position: absolute;
+	left: 137px;
+	width: 93px;
+	opacity: 0;
+	overflow: hidden;
+}
+
+#bgLoader, #imgLoader{
+	position: relative;
+	left: -90px;
+	top: -2px;
+	cursor: pointer;
+}
+
+#options-menu label, #image-menu label{
+	clear:left;
+}
+
+#options-menu .background-repeat{
+	overflow: hidden;
+	height: 0px;
+	margin:0 10px;
+
+	transition: all .4s ease-in-out;
+}
+
+#options-menu .background-repeat.active{
+	margin:10px 10px;
+	height: 20px;
+}
+
+#options-menu .bg-color{
+	width: 92%;
+}
+
+#options-menu .clrpicker{
+	height: 18px;
+	width: 18px;
+	background: white;
+	cursor:pointer;
+}
+
+#canvas-width, #canvas-height{
+	width: 55px;
+	border:none;
+	text-align:center;
+}
+
+#options-menu .back-btn, #image-menu .back-btn{
+	float: left;
+	clear: both;
+	width: 100%;
+	margin: 10px 0 0 0;
+	text-indent: 10px;
+	font-weight: bold;
+	padding: 15px 0;
+}
+
+#image-menu .dummy-imgLoader{
+	text-indent: 10px;
+	margin-top: 10px;
+}
+

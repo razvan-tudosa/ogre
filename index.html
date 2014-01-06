@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>OGRE</title>
+	<link rel="stylesheet" href="style.css">
+
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script src="js/jquery.cycle2.min.js"></script>
+	<script src="js/jquery.cycle2.scrollVert.min.js"></script>
+	<script src="js/main.js"></script>
+</head>
+<body>
+	<header>
+		<nav>
+			<div class="logo left"><img src="images/logo.png" alt="logo"></div>
+			<div class="right">
+				<div class="left" ><a class="login-register left animate" href="#">Login/Register</a></div>
+				<div class="twitter social left"><a href="#" class="animate"></a></div>
+				<div class="facebook social left"><a href="#" class="animate"></a></div>
+				<div class="left"><a class="try left animate" href="app.html">TRY</a></div>
+			</div>
+		</nav>
+		<div class="login-area animate">
+			<div class="login left">
+				<form action="">
+					<fieldset>
+						<legend>Login</legend>
+						<div class="input-row left">
+							<label class="left" for="email">Email:</label><input class="right" type="text" name="email">
+						</div>
+						<div class="input-row left">
+							<label class="left" for="password">Password:</label><input class="right" type="text" name="password">
+						</div>
+						<button class="animate">Login</button>
+					</fieldset>
+				</form>
+			</div>
+			<div class=" register right">
+				<form action="">
+					<fieldset>
+						<legend>Register</legend>
+						<div class="input-row left">
+							<label class="left" for="username">Username:</label><input class="right" type="text" name="username">
+						</div>
+						<div class="input-row left">
+							<label class="left" for="email">Email:</label><input class="right" type="text" name="email">
+						</div>
+						<div class="input-row left">
+							<label class="left" for="password">Password:</label><input class="right" type="text" name="password">
+						</div>
+						<button class="animate">Register</button>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</header>
+	<section>
+		<div class="cycle-slideshow slider" 
+		    data-cycle-fx="scrollVert" 
+		    data-cycle-timeout="2000"
+		    data-cycle-slides="> div"
+		    data-cycle-pager=".pager">
+			<div class="slide slide-1"></div>
+			<div class="slide slide-2"></div>
+			<div class="slide slide-3"></div>
+			<div class="slide slide-4"></div>
+		</div>
+		<div class="pager"></div>
+	</section>
+	<footer>
+		<span>&#169; OGRE 2013 is licensed under CLIW</span>
+	</footer>
+</body>
+</html>
