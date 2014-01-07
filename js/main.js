@@ -9,6 +9,17 @@
         },
         initializeCanvas : function() {
             ogreAPI.canvas = new fabric.Canvas('canvas');
+
+
+            var settings = {
+                text: 'test doi zece',
+                fontFamily: 'Verdana',
+                fontSize: 20,
+                textColor: 'black'
+            };
+
+
+            ogreAPI.addText(settings);
         },
         setCanvasWidth: function(width) {
             ogreAPI.canvas.setWidth(width).renderAll();
@@ -80,6 +91,20 @@
                 $('.dummy-imgLoader #img-path').val( fileName[fileName.length -1] );
             });
         },
+        addText: function(settings) {
+            var text = new fabric.Text( settings.text, {
+                fontFamily: settings.fontFamily,
+                fontSize: settings.fontSize,
+                fontStyle: settings.fontStyle,
+                fontWeight: settings.fontWeight,
+                textDecoration: settings.textDecoration,
+                fill: settings.textColor,
+                top: 500,
+                left: 100
+            });
+
+            ogreAPI.canvas.add(text);
+        },
         exportInfographic: function() {
             var png = ogreAPI.canvas.toDataURL({
                 format: 'png'
@@ -100,7 +125,7 @@
                 fabric.Image.fromURL(dataUrl, function(img) {
                     ogreAPI.canvas.add(img);
                 });
-            }, 2000);
+            }, 100);
         },
         colorPicker: function(){
             $('.clrpicker').ColorPicker({
@@ -195,7 +220,7 @@
 
         ogreAPI.loadDummyInfographic();
 
-
+        //ogreAPI.addText();
 
     });
 })();
