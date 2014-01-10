@@ -11,15 +11,16 @@
             ogreAPI.canvas = new fabric.Canvas('canvas');
 
 
-            var settings = {
-                text: 'test doi zece',
-                fontFamily: 'Verdana',
-                fontSize: 20,
-                textColor: 'black'
-            };
+            
 
+            //This can get the instance of an object for further modifications of 
+            //the canvas objects 
+            ogreAPI.canvas.on('mouse:down', function(options) {
+                if (options.target) {
+                    //console.log('an object was clicked! ', options.target);
+                }
+            });
 
-            ogreAPI.addText(settings);
         },
         setCanvasWidth: function(width) {
             ogreAPI.canvas.setWidth(width).renderAll();
@@ -92,6 +93,7 @@
             });
         },
         addText: function(settings) {
+
             var text = new fabric.Text( settings.text, {
                 fontFamily: settings.fontFamily,
                 fontSize: settings.fontSize,
@@ -128,7 +130,7 @@
             }, 100);
         },
         colorPicker: function(){
-            $('.clrpicker').ColorPicker({
+            $('.bg-color .clrpicker').ColorPicker({
                 color: '#000000',
                 onShow: function (colpkr) {
                     $(colpkr).fadeIn(500);
@@ -188,6 +190,52 @@
                 $('#canvas-width').on('change', function() {
                     ogreAPI.setCanvasWidth( $(this).val() );
                 });
+            },
+            submitText: function() {
+                var text, textColor = "#000", textSize, textFont;
+                var textStyle = {
+                    italic: false,
+                    bold: false,
+                    underline: false
+                };
+
+                $('.text-color .clrpicker').ColorPicker({
+                    color: '#000000',
+                    onShow: function (colpkr) {
+                        $(colpkr).fadeIn(500);
+                        return false;
+                    },
+                    onHide: function (colpkr) {
+                        $(colpkr).fadeOut(500);
+                        return false;
+                    },
+                    onChange: function (hsb, hex, rgb) {
+                        //ogreAPI.setCanvasBackgroundColor('#' + hex);
+                        $('.text-color .clrpicker').css('backgroundColor', '#' + hex);
+                        textColor = '#' + hex;
+                    }
+                });
+
+                $('#submit .ok-btn').on('click', function(e) {
+                    e.preventDefault();
+
+                    text = $('#add-text').val();
+
+                    textSize = $('#text-size > input').val();
+
+                    textFont = $('#font-selection').val();
+
+                    var settings = {
+                        text: text,
+                        fontFamily: textFont,
+                        fontSize: textSize,
+                        textColor: textColor
+                    };
+
+                    if(settings.text.length > 0)
+                        ogreAPI.addText(settings);
+
+                });
             }
         }
     };
@@ -220,7 +268,6 @@
 
         ogreAPI.loadDummyInfographic();
 
-        //ogreAPI.addText();
-
+        ogreAPI.listeners.submitText();
     });
 })();

@@ -82,8 +82,42 @@
 						</div>
 					</li>
 					<li>Add Text
-						<div class="sub-menu submenu-inactive">
-							<div></div>
+						<div id="add-text-menu" class="sub-menu submenu-inactive">
+							<input type="text" id="add-text" placeholder="Type your text here..."/>
+							<div class="text-color left">Text Color:
+								<div class="clrpicker right"></div>
+							</div>
+							<div class="text-style">Text Style:
+								<label for="italic-ckb">I</label><input type="checkbox" value="italic" name="italic-ckb"/>
+								<label for="bold-ckb">B</label><input type="checkbox" value="bold" name="bold-ckb"/>
+								<label for="underline-ckb">U</label><input type="checkbox" value="underline" name="underline-ckb"/>
+							</div>
+							<div id="text-size">
+								<label for="font-size">Text Size:</label>
+								<input type="text"/>
+							</div>
+							<div id="select-font">
+								<label for="font-family">Text font:</label>
+								<select name="font-family" id="font-selection">
+									<option value="Arial">Arial</option>
+									<option value="Times New Roman">Times New Roman</option>
+									<option value="Tahoma">Tahoma</option>
+									<option value="Verdana">Verdana</option>
+								</select>
+							</div>
+							<div id="upload-font">
+								<label for="">Upload Font:</label>
+								<input type="text">
+							</div>
+							<input type="file" id="upload-font">
+							
+							<div id="submit">
+								<div class="ok-btn">
+									OK
+								</div>
+							</div>
+
+							<div class="back-btn">Back</div>
 						</div>
 					</li>
 					

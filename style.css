@@ -441,7 +441,7 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	text-align:center;
 }
 
-#options-menu .back-btn, #image-menu .back-btn{
+#options-menu .back-btn, #image-menu .back-btn, #add-text-menu .back-btn{
 	float: left;
 	clear: both;
 	width: 100%;
@@ -454,5 +454,77 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 #image-menu .dummy-imgLoader{
 	text-indent: 10px;
 	margin-top: 10px;
+}
+
+#add-text{
+	border: none;
+	margin: 10px 0;
+	text-align: center;
+	width: 220px;
+	height: 25px;
+}
+
+#add-text-menu .text-color{
+	width:100%;
+	margin-bottom:10px;
+}
+
+#add-text-menu .text-style{
+	margin-bottom:10px;
+}
+
+#add-text-menu .text-style > input{
+	position: relative;
+	top: 2px;
+}
+
+#add-text-menu .text-style > label{
+	margin-left: 10px;
+}
+
+#text-size > input {
+	border:none;
+	margin-left: 5px;
+	margin-bottom: 10px;
+	text-align: center;
+	width: 30px;
+}
+
+#select-font{
+	margin-bottom:10px;
+}
+
+#upload-font{
+	margin-bottom:10px;
+}
+
+#upload-font > input{
+	border: none;
+	width: 120px;
+	margin-left: 3px;
+}
+
+#add-text-menu .text-color .clrpicker{
+	height: 20px;
+	width: 20px;
+	background: black;
+	margin-right:15px;
+}
+
+#submit{
+	width:100%;
+}
+
+#submit .ok-btn{
+	margin:0 auto;
+	background: black;
+	text-transform: uppercase;
+	color:white;
+	font-family: 'Verdana';
+	font-size: 15px;
+	padding: 5px;
+	width:40px;
+	text-align: center;
+	text-indent: 0px;
 }
 
