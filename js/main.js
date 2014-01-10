@@ -194,10 +194,23 @@
             submitText: function() {
                 var text, textColor = "#000", textSize, textFont;
                 var textStyle = {
-                    italic: false,
-                    bold: false,
-                    underline: false
+                    italic: "",
+                    bold: "",
+                    underline: ""
                 };
+
+                $('.text-style > input').on('change', function(e) {
+                    e.preventDefault();
+                    console.log( $(this).attr('name') );
+                    console.log( $(this).is(':checked') );
+
+                    if( $(this).is(':checked') ){
+                        textStyle[ $(this).attr('name') ] = $(this).attr('name');
+                    } else {
+                        textStyle[ $(this).attr('name') ] = "";
+                    }
+
+                });
 
                 $('.text-color .clrpicker').ColorPicker({
                     color: '#000000',
@@ -216,6 +229,8 @@
                     }
                 });
 
+
+
                 $('#submit .ok-btn').on('click', function(e) {
                     e.preventDefault();
 
@@ -229,7 +244,11 @@
                         text: text,
                         fontFamily: textFont,
                         fontSize: textSize,
-                        textColor: textColor
+                        textColor: textColor,
+                        fontStyle: textStyle.italic,
+                        fontWeight: textStyle.bold,
+                        textDecoration: textStyle.underline
+
                     };
 
                     if(settings.text.length > 0)
