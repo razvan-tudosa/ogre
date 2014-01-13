@@ -201,8 +201,6 @@
 
                 $('.text-style > input').on('change', function(e) {
                     e.preventDefault();
-                    console.log( $(this).attr('name') );
-                    console.log( $(this).is(':checked') );
 
                     if( $(this).is(':checked') ){
                         textStyle[ $(this).attr('name') ] = $(this).attr('name');
@@ -223,7 +221,6 @@
                         return false;
                     },
                     onChange: function (hsb, hex, rgb) {
-                        //ogreAPI.setCanvasBackgroundColor('#' + hex);
                         $('.text-color .clrpicker').css('backgroundColor', '#' + hex);
                         textColor = '#' + hex;
                     }
