@@ -252,6 +252,11 @@
                         ogreAPI.addText(settings);
 
                 });
+            },
+            offsetFix: function() {
+                $('section').on('scroll', function() {
+                    ogreAPI.canvas.calcOffset();
+                });
             }
         }
     };
@@ -283,6 +288,8 @@
         ogreAPI.addImage();
 
         ogreAPI.loadDummyInfographic();
+
+        ogreAPI.listeners.offsetFix();
 
         ogreAPI.listeners.submitText();
     });
