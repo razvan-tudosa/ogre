@@ -5,6 +5,7 @@
         canvas : null,
         obj: null,
         charts: [],
+        images: [],
         helper: {
             bgImage: null,
             repeatBg: true
@@ -76,15 +77,19 @@
                         
                         fabric.Image.fromURL(imgObj.src, function(img) {
                             ogreAPI.canvas.add(img).renderAll();
+                            img.myClass = "image";
+                            img.name = e.target.files[0].name.split('.')[0];
+                            ogreAPI.images.push(img);
+                            ogreAPI.canvas.setActiveObject( img );
                         });
                     };
                 };
 
                 reader.readAsDataURL(e.target.files[0]);
 
-                var fileName = $('#imgLoader').val();
-                fileName = fileName.split('\\');
-                $('.dummy-imgLoader #img-path').val( fileName[fileName.length -1] );
+                var fileName = e.target.files[0].name;
+                fileName = fileName.split('.');
+                $('.dummy-imgLoader #img-path').val( fileName[0] );
             });
         },
         text: {
@@ -217,7 +222,6 @@
             var png = ogreAPI.canvas.toDataURL({
                 format: 'png'
             });
-            console.log(png);
         },
             
         loadDummyInfographic : function() {
@@ -234,10 +238,11 @@
                 var dataUrl = 'data:image/svg+xml,' + encodeURIComponent(test);
 
                 fabric.Image.fromURL(dataUrl, function(img) {
-                    
-                    ogreAPI.charts.push( ogreAPI.canvas.add(img) );
-                    chartsLength = ogreAPI.charts.length;
-                    ogreAPI.charts[ chartsLength - 1 ].id = "chart" + chartsLength;
+
+                    ogreAPI.canvas.add(img)
+                    ogreAPI.charts.push( img );
+                    //chartsLength = ogreAPI.charts.length;
+                    img.myClass = "chart";
 
                 });
             }, 100);
@@ -318,6 +323,10 @@
                             ogreAPI.text.resetForm();
                             $('#add-text-menu #submit').removeClass('shift-up');
                         }, 300);
+                    } else if( $(this).parent().attr('id') == "image-menu") {
+                        setTimeout(function() {
+                            $('#img-path').val("");
+                        }, 300);
                     }
                 });
 
@@ -326,8 +335,7 @@
                 });
             },
             objectClick: function() {
-                //This can get the instance of an object for further modifications of 
-                //the canvas objects 
+                //This can get the instance of an object for further modifications 
                 ogreAPI.canvas.on('object:selected', function(options) {
                     if(options.target) {
 
@@ -335,15 +343,18 @@
                         
                         if(options.target.get('type') == "image") {
 
-                            for (item = 0; item < ogreAPI.charts.length; item++) {
-                                if(ogreAPI.charts[ item ] == options.target.canvas) {
-                                    //Get chart menu
-                                }
+                            if(options.target.myClass == "chart") {
+                                //Bring up the chart guns
                             }
 
+                            if(options.target.myClass == "image") {
+
+                                $('#img-path').val( options.target.name );
+                                $('#image-menu .remove-wrapper').css('height', 46);
+                            }
                         } else if(options.target.get('type') == "text") {
                             //Get text menu
-                            $('#add-text-menu #submit').addClass('shift-up');
+                            $('#image-menu #submit').addClass('shift-up');
                             $('#add-text-menu .remove-wrapper').css('height', 46);
                             
 
@@ -360,6 +371,8 @@
                     ogreAPI.text.resetForm();
                     $('#add-text-menu #submit').removeClass('shift-up');
                     $('.remove-wrapper').css('height', 0);
+                    $('#imgLoader').val("");
+                    $('#img-path').val(""); //From Image Menu
 
                 });
             },
@@ -425,7 +438,7 @@
         ogreAPI.listeners.offsetFix();
 
         ogreAPI.text.submitText();
-        
+
         ogreAPI.listeners.removeButton();
     });
 })();
