@@ -29,6 +29,10 @@ body section{
 	float: right;
 }
 
+.clear{
+	clear:both;
+}
+
 .border-top{
 	border-top: 5px solid #24700C;
 }
@@ -591,9 +595,22 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 
 #charts-wrapper{
 	background: rgba(0, 0, 0, 0.78);
+	color:white;
+	font-family: 'Verdana';
+	font-size: 14px;
+	font-weight: bold;
 	height: 85%;
 	position: absolute;
 	width: 100%;
+}
+
+#charts-wrapper input, #charts-wrapper select{
+	border:none;
+	padding: 4px 0;
+	position: relative;
+	text-indent: 5px;
+	top:-4px;
+	width: 150px;
 }
 
 #charts-panel{
@@ -609,7 +626,16 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	width: 800px;
 }
 
-#charts-panel .back-button{
+#charts-option-items{
+	margin-top: 70px;
+	width:260px;
+}
+
+#charts-option-items > *{
+	margin-bottom: 20px;
+}
+
+#charts-panel .back-button, #charts-panel .save-button{
 	background: black;
 	bottom: 10px;
 	color:white;
@@ -618,6 +644,13 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	font-weight: bold;
 	padding: 5px;
 	position: absolute; 
+	text-align: center;
+	width: 55px;
+}
+
+#charts-panel .save-button{
+	width:30px;
+	right:10px;
 }
 
 .remove-wrapper{

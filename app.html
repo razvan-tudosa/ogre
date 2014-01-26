@@ -171,7 +171,34 @@
 		</div>
 		<div id="charts-wrapper" class="hide">
 			<div id="charts-panel" class="border-top">
-				<div class="back-button btn">BACK</div>
+				<h1 class="panel-title"> Chart Options</h1>
+				<div id="charts-option-items">
+			        <div class="clear">
+			        	<label for="title">Title:</label>
+	                	<input type="text" id="title" class="right" name="title"/>
+	                </div>
+	                <div class="clear">
+	                	<label for="subtitle">Subtitle:</label>
+	                	<input type="text" id="subtitle" class="right" name="subtitle"/>
+	                </div>
+	                <div id="chartTypes" class="clear">
+	                	<label for="">Type:</label>
+	                	<select id="chartType" class="right">
+	            			<option value="column">Column</option>
+	            			<option value="line">Line</option>
+	            			<option value="bar">Bar</option>
+	            			<option value="area">Area</option>
+	            			<option value="range">Range</option>
+	        			</select>
+	        		</div>
+	        		<div class="clear">
+	        			<label for="choose-file">Choose File:</label>
+	        			<input type="file" id="file" class="right" name="choose-file"/>
+	        		</div>
+        		</div>
+        		<div id="container"></div>
+		        <div class="back-button btn">BACK</div>
+		        <div class="save-button btn">OK</div>
 			</div>
 		</div>
 	</section>
