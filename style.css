@@ -638,3 +638,23 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 .remove-button:hover{
 	background: rgba(0, 0, 0, 0.1);
 }
+
+#export > ul{
+	cursor: default;
+}
+
+#export .export-item{
+	padding: 15px 0;
+}
+
+#export .export-item a{
+	background: black;
+	color:white;
+	margin-left: 30px;
+	text-decoration: none;
+	padding: 5px;
+}
+
+#export .export-item a:active{
+	background: rgb(107, 5, 5);;
+}

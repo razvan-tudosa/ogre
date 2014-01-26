@@ -220,11 +220,36 @@
                 $('#font-selection').val("Arial");
             }
         },
-            
-        exportInfographic: function() {
-            var png = ogreAPI.canvas.toDataURL({
-                format: 'png'
-            });
+
+        exportInfographic: {
+            _toSVG: function() {
+                var infographic = ogreAPI.canvas.toSVG();
+                
+
+                $('#export-svg a').attr('href', "data:application/octet-stream," + encodeURIComponent(infographic) );
+            },
+            _toPNG: function() {
+                var infographic = ogreAPI.canvas.toDataURL({
+                    format: 'png'
+                });
+
+                $('#export-png a').attr('href', infographic);
+            },
+            _toJPG: function() {
+                var infographic = ogreAPI.canvas.toDataURL({
+                    format: 'jpg'
+                });
+
+                $('#export-jpg a').attr('href', infographic);
+            },
+            all: function() {
+
+                $('#export').on('click', function() {
+                    ogreAPI.exportInfographic._toSVG();
+                    ogreAPI.exportInfographic._toPNG();
+                    ogreAPI.exportInfographic._toJPG();
+                });
+            }
         },
             
         loadDummyInfographic : function() {
@@ -300,8 +325,6 @@
                 $('.menu > ul > li').on('click', function(e) {
 
                     e.stopPropagation();
-
-                    console.log($(this).attr('id'));
 
                     if($(this).attr('id') == "charts-item") {
                         $('#charts-wrapper').removeClass('hide');
@@ -449,5 +472,7 @@
         ogreAPI.text.submitText();
 
         ogreAPI.listeners.removeButton();
+
+        ogreAPI.exportInfographic.all();
     });
 })();
