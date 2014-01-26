@@ -18,8 +18,24 @@ body section{
 	transition: all .3s ease-in-out;
 }
 
-.left{float: left;}
-.right{float: right;}
+.hide{
+	display: none;
+}
+
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+
+.border-top{
+	border-top: 5px solid #24700C;
+}
+
+.btn{
+	cursor: pointer;
+}
 
 nav{
 	position: relative;
@@ -337,6 +353,12 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	width: calc(100% - 250px);
 }
 
+#draw-board:after{
+	content: "";
+	display: block;
+	height: 50px;
+}
+
 #canvas{
 	background: white;
 	margin:0 auto; 
@@ -499,27 +521,69 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	margin-left: 3px;
 }
 
+#font-selection{
+	border: none;
+	margin-left: 6px;
+	width: 140px;
+}
+
 #add-text-menu .text-color .clrpicker{
+	background: black;
 	height: 20px;
-	width: 20px;
-	background: black;
 	margin-right:15px;
+	width: 20px;
 }
 
-#submit{
-	width:100%;
+#add-text-menu .btn-wrapper{
+	height: 28px;
+	overflow: hidden;
 }
 
-#submit .ok-btn{
-	margin:0 auto;
+.shift-up{
+	margin-top:-28px!important;
+}
+
+.ok-btn{
 	background: black;
-	text-transform: uppercase;
 	color:white;
 	font-family: 'Verdana';
 	font-size: 15px;
+	margin:0 auto;
 	padding: 5px;
-	width:40px;
+	text-transform: uppercase;
 	text-align: center;
 	text-indent: 0px;
+	width:80px;
+}
+
+#charts-wrapper{
+	background: rgba(0, 0, 0, 0.78);
+	height: 85%;
+	position: absolute;
+	width: 100%;
+}
+
+#charts-panel{
+	background: rgb(13, 189, 13);;
+	bottom: 0;
+	height: 500px;
+	left: 0;
+	margin: auto;
+	padding: 10px;
+	position: absolute;
+	right: 0;
+	top:0;
+	width: 800px;
+}
+
+#charts-panel .back-button{
+	background: black;
+	bottom: 10px;
+	color:white;
+	font-family: 'Verdana';
+	font-size: 15px;
+	font-weight: bold;
+	padding: 5px;
+	position: absolute; 
 }
 

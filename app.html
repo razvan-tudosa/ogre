@@ -65,7 +65,7 @@
 			
 			<div class="menu left">
 				<ul>
-					<li>Charts
+					<li id="charts-item">Charts
 						
 					</li>
 					<li>Add Image
@@ -105,16 +105,14 @@
 									<option value="Verdana">Verdana</option>
 								</select>
 							</div>
-							<div id="upload-font">
+							<!-- <div id="upload-font">
 								<label for="">Upload Font:</label>
 								<input type="text">
 							</div>
-							<input type="file" id="upload-font">
-							
-							<div id="submit">
-								<div class="ok-btn">
-									OK
-								</div>
+							<input type="file" id="upload-font"> -->
+							<div class="btn-wrapper">
+								<div id="submit" class="ok-btn animate">OK</div>
+								<div id="modify-text" class="ok-btn">Modify</div>
 							</div>
 
 							<div class="back-btn">Back</div>
@@ -159,6 +157,11 @@
 		</div>
 		<div id="draw-board">
 			<canvas id="canvas" width="900" height="600"></canvas>
+		</div>
+		<div id="charts-wrapper" class="hide">
+			<div id="charts-panel" class="border-top">
+				<div class="back-button btn">BACK</div>
+			</div>
 		</div>
 	</section>
 	<footer>

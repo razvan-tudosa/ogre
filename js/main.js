@@ -87,6 +87,7 @@
         },
         text: {
             editing: false,
+            object: null,
             addText: function(settings) {
 
                 var text = new fabric.Text( settings.text, {
@@ -104,6 +105,8 @@
             },
 
             getCurrentTextSettings: function(object) {
+
+                ogreAPI.text.object = object;
 
                 ogreAPI.text.editing = true;
 
@@ -136,6 +139,19 @@
 
             },
 
+            modifyButton: function() {
+                $("#modify-text").on('click', function() {
+                    //object.text = $('#add-text-menu #add-text').val();
+                    ogreAPI.text.object.setText( $('#add-text-menu #add-text').val() );
+                    ogreAPI.text.object.fill = $('.text-color .clrpicker').css('background-color');
+
+                    ogreAPI.text.object.fontSize = $("#text-size > input").val();
+                    ogreAPI.text.object.fontFamily = $('#font-selection').val();
+
+                    ogreAPI.canvas.renderAll();
+                });
+            },
+
             submitText: function() {
 
                 var text, textColor = "#000", textSize, textFont;
@@ -156,7 +172,7 @@
 
                 });
 
-                $('#submit .ok-btn').on('click', function(e) {
+                $('#submit').on('click', function(e) {
                     e.preventDefault();
 
                     text = $('#add-text').val();
@@ -209,6 +225,7 @@
                 
                 ogreAPI.initializeCanvas();
                 ogreAPI.listeners.objectClick();
+                ogreAPI.text.modifyButton();
                 //var chart = document.getElementById('chart').innerHTML;
                 
                 var dataUrl = 'data:image/svg+xml,' + encodeURIComponent(test);
@@ -270,6 +287,11 @@
             menuItemButton: function() {
                 //Menu Item Button Listener
                 $('.menu li').on('click', function() {
+
+                    if($(this).attr('id') == "charts-item") {
+                        $('#charts-wrapper').removeClass('hide');
+                    }
+
                     if($(this).children().length == 0) return;
 
                     $(this).find('>:first-child').addClass('submenu-active');
@@ -287,16 +309,24 @@
 
                     if( $(this).parent().attr('id') == "add-text-menu" ) {
                         ogreAPI.text.editing = false;
-                        ogreAPI.text.resetForm();
+
+                        setTimeout(function() {
+                            ogreAPI.text.resetForm();
+                            $('#add-text-menu #submit').removeClass('shift-up');
+                        }, 300);
                     }
+                });
+
+                $('#charts-panel .back-button').on('click', function() {
+                    $('#charts-wrapper').addClass('hide');
                 });
             },
             objectClick: function() {
                 //This can get the instance of an object for further modifications of 
                 //the canvas objects 
-                ogreAPI.canvas.on('mouse:down', function(options) {
+                ogreAPI.canvas.on('object:selected', function(options) {
                     if(options.target) {
-
+                        
                         if(options.target.get('type') == "image") {
 
                             for (item = 0; item < ogreAPI.charts.length; item++) {
@@ -307,14 +337,21 @@
 
                         } else if(options.target.get('type') == "text") {
                             //Get text menu
+                            $('#add-text-menu #submit').addClass('shift-up');
+                            
                             $('.menu-wrapper .menu').addClass('slide-left');
                             $('.menu-wrapper .menu #add-text-menu').addClass('submenu-active');
 
                             ogreAPI.text.getCurrentTextSettings(options.target);
-
-                            console.log(options.target);
                         }
                     }
+                });
+
+                ogreAPI.canvas.on('selection:cleared', function() {
+                    ogreAPI.text.editing = false;
+                    ogreAPI.text.resetForm();
+                    $('#add-text-menu #submit').removeClass('shift-up');
+
                 });
             },
             optionsRepeatBg: function() {
