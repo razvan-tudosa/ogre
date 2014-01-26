@@ -462,7 +462,6 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	float: left;
 	clear: both;
 	width: 100%;
-	margin: 10px 0 0 0;
 	text-indent: 10px;
 	font-weight: bold;
 	padding: 15px 0;
@@ -536,15 +535,17 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 
 #add-text-menu .btn-wrapper{
 	height: 28px;
+	margin-bottom: 10px;
 	overflow: hidden;
 }
 
 .shift-up{
-	margin-top:-28px!important;
+	margin-top:-30px!important;
 }
 
 .ok-btn{
 	background: black;
+	border-bottom: 2px solid rgb(13, 189, 13);
 	color:white;
 	font-family: 'Verdana';
 	font-size: 15px;
@@ -587,3 +588,20 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	position: absolute; 
 }
 
+.remove-wrapper{
+	height: 0px;
+	overflow: hidden;
+}
+
+#add-text-menu .remove-button{
+	float: left;
+	clear: both;
+	width: 100%;
+	text-indent: 10px;
+	font-weight: bold;
+	padding: 15px 0;
+}
+
+#add-text-menu .remove-button:hover{
+	background: rgba(0, 0, 0, 0.1);
+}

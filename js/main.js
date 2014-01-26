@@ -11,6 +11,8 @@
         },
         initializeCanvas: function() {
             ogreAPI.canvas = new fabric.Canvas('canvas');
+            $('#canvas-height').val( ogreAPI.canvas.getHeight() );
+            $('#canvas-width').val( ogreAPI.canvas.getWidth() );
         },
         clearCanvas: function() {
             ogreAPI.canvas.clear();
@@ -97,11 +99,12 @@
                     fontWeight: settings.fontWeight,
                     textDecoration: settings.textDecoration,
                     fill: settings.textColor,
-                    top: 500,
-                    left: 100
+                    top: ogreAPI.canvas.getHeight() / 2,
+                    left: ogreAPI.canvas.getWidth() / 2
                 });
 
                 ogreAPI.canvas.add(text);
+                API.canvas.setActiveObject( text );
             },
 
             getCurrentTextSettings: function(object) {
@@ -205,7 +208,7 @@
                 $("#italic").prop('checked', false);
                 $("#bold").prop('checked', false);
                 $("#underline").prop('checked', false);
-                $("#text-size > input").val("");
+                $("#text-size > input").val("15");
                 $('#font-selection').val("Arial");
             }
         },
@@ -305,7 +308,8 @@
                     //$(this).closest('ul').removeClass('submenu-active');
                     $(this).parent().removeClass('submenu-active');
                     $('.menu').removeClass('slide-left');
-                    console.log($(this).parent().attr('id'));
+
+                    ogreAPI.canvas.deactivateAll().renderAll(); //Deselects all objects that are active on canvas
 
                     if( $(this).parent().attr('id') == "add-text-menu" ) {
                         ogreAPI.text.editing = false;
@@ -326,6 +330,8 @@
                 //the canvas objects 
                 ogreAPI.canvas.on('object:selected', function(options) {
                     if(options.target) {
+
+                        
                         
                         if(options.target.get('type') == "image") {
 
@@ -338,7 +344,9 @@
                         } else if(options.target.get('type') == "text") {
                             //Get text menu
                             $('#add-text-menu #submit').addClass('shift-up');
+                            $('#add-text-menu .remove-wrapper').css('height', 46);
                             
+
                             $('.menu-wrapper .menu').addClass('slide-left');
                             $('.menu-wrapper .menu #add-text-menu').addClass('submenu-active');
 
@@ -351,6 +359,7 @@
                     ogreAPI.text.editing = false;
                     ogreAPI.text.resetForm();
                     $('#add-text-menu #submit').removeClass('shift-up');
+                    $('.remove-wrapper').css('height', 0);
 
                 });
             },
@@ -368,6 +377,11 @@
             widthCustomization: function() {
                 $('#canvas-width').on('change', function() {
                     ogreAPI.setCanvasWidth( $(this).val() );
+                });
+            },
+            removeButton: function() {
+                $('.remove-button').on('click', function() {
+                    ogreAPI.canvas.remove( ogreAPI.canvas.getActiveObject() );
                 });
             },
             
@@ -411,5 +425,7 @@
         ogreAPI.listeners.offsetFix();
 
         ogreAPI.text.submitText();
+        
+        ogreAPI.listeners.removeButton();
     });
 })();
