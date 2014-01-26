@@ -149,9 +149,12 @@
 
             modifyButton: function() {
                 $("#modify-text").on('click', function() {
-                    //object.text = $('#add-text-menu #add-text').val();
                     ogreAPI.text.object.setText( $('#add-text-menu #add-text').val() );
                     ogreAPI.text.object.fill = $('.text-color .clrpicker').css('background-color');
+
+                    ogreAPI.text.object.fontStyle = $('#italic').is(':checked') ? "italic" : "";
+                    ogreAPI.text.object.fontWeight = $('#bold').is(':checked') ? "bold" : "";
+                    ogreAPI.text.object.textDecoration = $('#underline').is(':checked') ? "underline" : "";
 
                     ogreAPI.text.object.fontSize = $("#text-size > input").val();
                     ogreAPI.text.object.fontFamily = $('#font-selection').val();
@@ -229,7 +232,6 @@
 
             setTimeout(function() {
                 //$('#chart').css({'display':'none'});
-                
                 ogreAPI.initializeCanvas();
                 ogreAPI.listeners.objectClick();
                 ogreAPI.text.modifyButton();
@@ -239,9 +241,10 @@
 
                 fabric.Image.fromURL(dataUrl, function(img) {
 
-                    ogreAPI.canvas.add(img)
+                    img.top = 100;
+                    img.left = 100;
+                    ogreAPI.canvas.add(img);
                     ogreAPI.charts.push( img );
-                    //chartsLength = ogreAPI.charts.length;
                     img.myClass = "chart";
 
                 });
@@ -294,10 +297,16 @@
             },
             menuItemButton: function() {
                 //Menu Item Button Listener
-                $('.menu li').on('click', function() {
+                $('.menu > ul > li').on('click', function(e) {
+
+                    e.stopPropagation();
+
+                    console.log($(this).attr('id'));
 
                     if($(this).attr('id') == "charts-item") {
                         $('#charts-wrapper').removeClass('hide');
+                    } else if($(this).attr('id') == "text-item") {
+                        //$('.text-color .clrpicker').ColorPickerSetColor("#000").css({'background-color':"#000"});
                     }
 
                     if($(this).children().length == 0) return;
@@ -354,7 +363,7 @@
                             }
                         } else if(options.target.get('type') == "text") {
                             //Get text menu
-                            $('#image-menu #submit').addClass('shift-up');
+                            $('#add-text-menu #submit').addClass('shift-up');
                             $('#add-text-menu .remove-wrapper').css('height', 46);
                             
 
