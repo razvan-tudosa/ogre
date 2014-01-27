@@ -623,7 +623,20 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	position: absolute;
 	right: 0;
 	top:0;
+	width: 1080px;
+}
+
+#charts-panel #container{
+	background: white;
+	height: 400px;
+	position: absolute;
+	right: 10px;
+	top: 50px;
 	width: 800px;
+}
+
+#charts-panel .panel-title{
+	margin-left: 50px;
 }
 
 #charts-option-items{
