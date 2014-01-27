@@ -626,7 +626,7 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	width: 1080px;
 }
 
-#charts-panel #container{
+#charts-panel #container-wrapper{
 	background: white;
 	height: 400px;
 	position: absolute;
