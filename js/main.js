@@ -10,6 +10,7 @@
         },
         initializeCanvas: function() {
             ogreAPI.canvas = new fabric.Canvas('canvas');
+            ogreAPI.setCanvasHeight(900);
             $('#canvas-height').val( ogreAPI.canvas.getHeight() );
             $('#canvas-width').val( ogreAPI.canvas.getWidth() );
         },
@@ -220,7 +221,7 @@
         },
 
         charts:{
-            chartElements: [],
+            chart: null,
 
             chartsOnCanvas: [],
 
@@ -230,7 +231,7 @@
              
                 ogreAPI.charts.options = {
                     chart: {
-                        renderTo: 'container-1',
+                        renderTo: 'container',
                         defaultSeriesType: $('#chartType').val(),
                         borderRadius: 0,
                         backgroundColor: 'rgba(0,0,0,0)'
@@ -306,7 +307,7 @@
                             });
                             // Create the chart
                             //ogreAPI.chart = new Highcharts.Chart(ogreAPI.charts.options);
-                            ogreAPI.charts.chartElements.push( new Highcharts.Chart(ogreAPI.charts.options) );
+                            ogreAPI.charts.chart = new Highcharts.Chart(ogreAPI.charts.options);
                         };
 
                         r.readAsText(file);
@@ -318,17 +319,17 @@
 
                 $('#chartType').on('change', function() {
 
-                    ogreAPI.chart = $('#container').highcharts();
+                    ogreAPI.charts.chart = $('#container').highcharts();
 
-                    if(ogreAPI.chart) {
-                        ogreAPI.chart.destroy();
+                    if(ogreAPI.charts.chart) {
+                        ogreAPI.charts.chart.destroy();
                         var chartType = $('#chartType').val();
 
                         ogreAPI.charts.options.chart.defaultSeriesType = chartType;
                         ogreAPI.charts.options.title.text = $('#title').val();
                         ogreAPI.charts.options.subtitle.text = $('#subtitle').val();
 
-                        ogreAPI.chart = new Highcharts.Chart(ogreAPI.charts.options);
+                        ogreAPI.charts.chart = new Highcharts.Chart(ogreAPI.charts.options);
                     }
                 });
 
@@ -395,7 +396,6 @@
                     ogreAPI.canvas.add(img);
                     ogreAPI.charts.chartsOnCanvas.push( img );
                     img.myClass = "chart";
-                    img.myId = "chart-" + ogreAPI.charts.chartElements.length;
 
                 });
            // }, 100);
@@ -453,6 +453,9 @@
 
                     if($(this).attr('id') == "charts-item") {
                         $('#charts-wrapper').removeClass('hide');
+                        $('#file').val("");
+                        $('#title').val("");
+                        $('#subtitle').val("");
                     } else if($(this).attr('id') == "text-item") {
                         //$('.text-color .clrpicker').ColorPickerSetColor("#000").css({'background-color':"#000"});
                     }
@@ -559,6 +562,323 @@
                 $('section').on('scroll', function() {
                     ogreAPI.canvas.calcOffset();
                 });
+            },
+            loadTemplate: function(){
+
+                $('#tmp1').on('click',function(){
+                    ogreAPI.templates.firstTemplate();
+                });
+
+                $('#tmp2').on('click',function(){
+                    ogreAPI.templates.secondTemplate();
+                });
+
+                $('#tmp3').on('click',function(){
+                    ogreAPI.templates.thirdTemplate();
+                });
+            }
+        },
+
+        templates: {
+            firstTemplate: function(){
+                ogreAPI.canvas.clear();
+                        
+                var options = {
+                    title: {
+                        text: 'Monthly Average Temperature',
+                        x: -20 //center
+                    },
+                    subtitle: {
+                        text: 'Source: WorldClimate.com',
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Temperature (°C)'
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    tooltip: {
+                        valueSuffix: '°C'
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    series: [{
+                        name: 'Tokyo',
+                        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+                    }, {
+                        name: 'New York',
+                        data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+                    }, {
+                        name: 'Berlin',
+                        data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+                    }, {
+                        name: 'London',
+                        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                    }]
+                };
+
+                //var chart = new Highcharts.Chart(options);
+                var chart = $('#container').highcharts(options);
+
+                var title = new fabric.Text( "Click to modify title", {
+                    fontFamily: 'Arial',
+                    fontSize: 60,
+                    fill: '#000000',
+                    top: 20,
+                    left: 210
+                });
+                var subtitle = new fabric.Text( "Click to modify subtitle", {
+                    fontFamily: 'Arial',
+                    fontSize: 40,
+                    fill: '#000000',
+                    top: 100,
+                    left: 260
+                });
+                var introduction = new fabric.Text( "Here you can add description of your infographic", {
+                    fontFamily: 'Arial',
+                    fontSize: 25,
+                    fill: '#000000',
+                    top: 180,
+                    left: 200
+                });
+
+                ogreAPI.canvas.add(title);
+                ogreAPI.canvas.add(subtitle);
+                ogreAPI.canvas.add(introduction);        
+                ogreAPI.setCanvasBackgroundColor('#CCCC99');
+              
+                chart = $('#container').highcharts();
+                var svg = chart.getSVG();
+                
+                var dataUrl = 'data:image/svg+xml,' + encodeURIComponent(svg);
+
+                fabric.Image.fromURL(dataUrl, function(img) {
+                    img.top = 300;
+                    img.left = 150;
+                    ogreAPI.canvas.add(img)
+                    //ogreAPI.charts.push( img );
+                    //chartsLength = ogreAPI.charts.length;
+                    img.myClass = "chart";
+                });
+            },
+            secondTemplate: function(){
+                ogreAPI.canvas.clear();
+                var options = {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'Historic World Population by Region'
+                    },
+                    subtitle: {
+                        text: 'Source: Wikipedia.org'
+                    },
+                    xAxis: {
+                        categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+                        title: {
+                            text: null
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Population (millions)',
+                            align: 'high'
+                        },
+                        labels: {
+                            overflow: 'justify'
+                        }
+                    },
+                    tooltip: {
+                        valueSuffix: ' millions'
+                    },
+                    plotOptions: {
+                        bar: {
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'top',
+                        x: -40,
+                        y: 100,
+                        floating: true,
+                        borderWidth: 1,
+                        backgroundColor: '#FFFFFF',
+                        shadow: true
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: 'Year 1800',
+                        data: [107, 31, 635, 203, 2]
+                    }, {
+                        name: 'Year 1900',
+                        data: [133, 156, 947, 408, 6]
+                    }, {
+                        name: 'Year 2008',
+                        data: [973, 914, 4054, 732, 34]
+                    }]
+                };
+                var chart = $('#container').highcharts(options);
+
+                var title = new fabric.Text( "Click to modify title", {
+                    fontFamily: 'Arial',
+                    fontSize: 60,
+                    fill: '#FFFFFF',
+                    top: 20,
+                    left: 210
+                });
+                var subtitle = new fabric.Text( "Click to modify subtitle", {
+                    fontFamily: 'Arial',
+                    fontSize: 40,
+                    fill: '#FFFFFF',
+                    top: 100,
+                    left: 260
+                });
+                var introduction = new fabric.Text( "Here you can add description of your infographic", {
+                    fontFamily: 'Arial',
+                    fontSize: 25,
+                    fill: '#FFFFFF',
+                    top: 180,
+                    left: 200
+                });
+
+                ogreAPI.canvas.add(title);
+                ogreAPI.canvas.add(subtitle);
+                ogreAPI.canvas.add(introduction);
+                ogreAPI.setCanvasBackgroundColor('#996633');
+
+                chart = $('#container').highcharts();
+                var svg = chart.getSVG();
+                
+                var dataUrl = 'data:image/svg+xml,' + encodeURIComponent(svg);
+
+                fabric.Image.fromURL(dataUrl, function(img) {
+                    img.top = 300;
+                    img.left = 150;
+                    ogreAPI.canvas.add(img)
+                    //ogreAPI.charts.chartpush( img );
+                    //chartsLength = ogreAPI.charts.length;
+                    img.myClass = "chart";
+                });
+            },
+            thirdTemplate: function(){
+                ogreAPI.canvas.clear();
+                var options = {
+                    chart: {
+                        type: 'area'
+                    },
+                    title: {
+                        text: 'Historic and Estimated Worldwide Population Distribution by Region'
+                    },
+                    subtitle: {
+                        text: 'Source: Wikipedia.org'
+                    },
+                    xAxis: {
+                        categories: ['1750', '1800', '1850', '1900', '1950', '1999', '2050'],
+                        tickmarkPlacement: 'on',
+                        title: {
+                            enabled: false
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Percent'
+                        }
+                    },
+                    tooltip: {
+                        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} millions)<br/>',
+                        shared: true
+                    },
+                    plotOptions: {
+                        area: {
+                            stacking: 'percent',
+                            lineColor: '#ffffff',
+                            lineWidth: 1,
+                            marker: {
+                                lineWidth: 1,
+                                lineColor: '#ffffff'
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Asia',
+                        data: [502, 635, 809, 947, 1402, 3634, 5268]
+                    }, {
+                        name: 'Africa',
+                        data: [106, 107, 111, 133, 221, 767, 1766]
+                    }, {
+                        name: 'Europe',
+                        data: [163, 203, 276, 408, 547, 729, 628]
+                    }, {
+                        name: 'America',
+                        data: [18, 31, 54, 156, 339, 818, 1201]
+                    }, {
+                        name: 'Oceania',
+                        data: [2, 2, 2, 6, 13, 30, 46]
+                    }]
+                };
+                
+                var chart = $('#container').highcharts(options);
+
+                var title = new fabric.Text( "Click to modify title", {
+                    fontFamily: 'Arial',
+                    fontSize: 60,
+                    fill: '#FFFFFF',
+                    top: 20,
+                    left: 210
+                });
+                var subtitle = new fabric.Text( "Click to modify subtitle", {
+                    fontFamily: 'Arial',
+                    fontSize: 40,
+                    fill: '#FFFFFF',
+                    top: 100,
+                    left: 260
+                });
+                var introduction = new fabric.Text( "Here you can add description of your infographic", {
+                    fontFamily: 'Arial',
+                    fontSize: 25,
+                    fill: '#FFFFFF',
+                    top: 180,
+                    left: 200
+                });
+
+                ogreAPI.canvas.add(title);
+                ogreAPI.canvas.add(subtitle);
+                ogreAPI.canvas.add(introduction);
+                ogreAPI.setCanvasBackgroundColor('#006699');
+
+                chart = $('#container').highcharts();
+                var svg = chart.getSVG();
+                
+                var dataUrl = 'data:image/svg+xml,' + encodeURIComponent(svg);
+
+                fabric.Image.fromURL(dataUrl, function(img) {
+                    img.top = 300;
+                    img.left = 150;
+                    ogreAPI.canvas.add(img)
+                    //ogreAPI.charts.push( img );
+                    //chartsLength = ogreAPI.charts.length;
+                    img.myClass = "chart";
+                });
             }
         }
     };
@@ -571,6 +891,8 @@
         $('.pager span').text(""); //Eliminate the text from bullets on the slider
 
         ogreAPI.initializeCanvas();
+
+        ogreAPI.listeners.loadTemplate();
 
         ogreAPI.listeners.objectClick();
 

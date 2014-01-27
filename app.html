@@ -12,6 +12,9 @@
 	<script src="js/fabricJS/fabric.js"></script>
 	<script src="js/colorpicker/colorpicker.js"></script>
 	<script src="js/highcharts/highcharts.js"></script>
+	<script src="js/highcharts/highcharts-more.js"></script>
+	<script src="js/highcharts/funnel.js"></script>
+	<script src="js/highcharts/exporting.js"></script>
 
 	<script src="js/main.js"></script>
 </head>
@@ -66,7 +69,7 @@
 			
 			<div class="menu left">
 				<ul>
-					<li id="charts-item">Charts
+					<li id="charts-item">Add Chart
 						
 					</li>
 					<li>Add Image
@@ -149,6 +152,14 @@
 							<div class="back-btn">Back</div>
 						</div>
 					</li>
+					<li>Templates
+						<ul class="submenu-inactive">
+							<li id="tmp1">Template 1</li>
+							<li id="tmp2">Template 2</li>
+							<li id="tmp3">Template 3</li>
+							<li class="back-btn">Back</li>
+						</ul>
+					</li>
 					<li id="export">Export
 						<ul class="submenu-inactive border-top">
 							<div id="export-svg" class="export-item">
@@ -198,10 +209,10 @@
 	        		</div>
         		</div>
         		<div id="container-wrapper">
-        			<div id="container-1" class="container"></div>
+        			<div id="container"></div>
         		</div>
 		        <div class="back-button btn">BACK</div>
-		        <div id="add-chart" class="save-button btn">OK</div>
+		        <div id="add-chart" class="save-button btn">ADD</div>
 			</div>
 		</div>
 	</section>
