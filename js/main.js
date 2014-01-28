@@ -234,7 +234,6 @@
                         renderTo: 'container',
                         defaultSeriesType: $('#chartType').val(),
                         borderRadius: 0,
-                        backgroundColor: 'rgba(0,0,0,0)'
                     },
                     title: {
                         text: ''
@@ -250,6 +249,9 @@
                             text: ''
                         }
                     },
+                    exporting: {
+                        enabled: false
+                    },
                     series: [],
                     credits: {
                         enabled: false
@@ -264,6 +266,8 @@
                     ogreAPI.charts.options.series = [];
                     ogreAPI.charts.options.title.text = $('#title').val();
                     ogreAPI.charts.options.subtitle.text = $('#subtitle').val();
+
+                    $('#dummy-chart-file').val(file.name.split(".")[0]);
 
                     if(file) {
 
@@ -456,6 +460,8 @@
                         $('#file').val("");
                         $('#title').val("");
                         $('#subtitle').val("");
+                        $('#dummy-chart-file').val("");
+                        $('#container').empty();
                     } else if($(this).attr('id') == "text-item") {
                         //$('.text-color .clrpicker').ColorPickerSetColor("#000").css({'background-color':"#000"});
                     }
@@ -464,6 +470,11 @@
 
                     $(this).find('>:first-child').addClass('submenu-active');
                     $('.menu').addClass('slide-left');
+                });
+
+                $('#clear-board').on('click', function() {
+                    ogreAPI.canvas.clear();
+                    ogreAPI.setCanvasBackgroundColor('#fff');
                 });
             },
             menuBackButton: function() {
@@ -485,8 +496,9 @@
                         }, 300);
                     } else if( $(this).parent().attr('id') == "image-menu") {
                         setTimeout(function() {
+                            $('.dummy-imgLoader').removeClass('hide');
                             $('#img-path').val("");
-                        }, 300);
+                        }, 500);
                     }
                 });
             },
@@ -503,9 +515,17 @@
 
                             if(options.target.myClass == "chart") {
                                 //Bring up the chart guns
+                                $('.menu-wrapper .menu').addClass('slide-left');
+                                $('.menu-wrapper .menu #image-menu').addClass('submenu-active');
+                                $('.dummy-imgLoader').addClass('hide');
+                                $('#image-menu .remove-wrapper').css('height', 46);
                             }
 
                             if(options.target.myClass == "image") {
+
+                                $('.menu-wrapper .menu').addClass('slide-left');
+                                $('.menu-wrapper .menu #image-menu').addClass('submenu-active');
+                                $('.dummy-imgLoader').removeClass('hide');
 
                                 $('#img-path').val( options.target.name );
                                 $('#image-menu .remove-wrapper').css('height', 46);
@@ -609,6 +629,9 @@
                     tooltip: {
                         valueSuffix: '°C'
                     },
+                    exporting: {
+                        enabled: false
+                    },
                     legend: {
                         layout: 'vertical',
                         align: 'right',
@@ -705,6 +728,9 @@
                     tooltip: {
                         valueSuffix: ' millions'
                     },
+                    exporting: {
+                        enabled: false
+                    },
                     plotOptions: {
                         bar: {
                             dataLabels: {
@@ -799,10 +825,14 @@
                             enabled: false
                         }
                     },
+
                     yAxis: {
                         title: {
                             text: 'Percent'
                         }
+                    },
+                    exporting: {
+                        enabled: false
                     },
                     tooltip: {
                         pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} millions)<br/>',
@@ -891,6 +921,8 @@
         $('.pager span').text(""); //Eliminate the text from bullets on the slider
 
         ogreAPI.initializeCanvas();
+
+        ogreAPI.templates.firstTemplate();
 
         ogreAPI.listeners.loadTemplate();
 

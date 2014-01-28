@@ -149,11 +149,12 @@
 							</div>
 							<label for="board-width" class="left">Board Width:</label><input name="board-width" id="canvas-width" class="right" type="text">
 							<label for="board-height" class="left">Board Height:</label><input name="board-height" id="canvas-height" class="right" type="text">
+							<div id="clear-board" class="clear">Clear Board</div>
 							<div class="back-btn">Back</div>
 						</div>
 					</li>
 					<li>Templates
-						<ul class="submenu-inactive">
+						<ul class="sub-menu submenu-inactive">
 							<li id="tmp1">Template 1</li>
 							<li id="tmp2">Template 2</li>
 							<li id="tmp3">Template 3</li>
@@ -161,7 +162,7 @@
 						</ul>
 					</li>
 					<li id="export">Export
-						<ul class="submenu-inactive border-top">
+						<ul class="sub-menu submenu-inactive border-top">
 							<div id="export-svg" class="export-item">
 								<span>To SVG:</span><a href="" download="export.svg" class="animate">Download</a>
 							</div>
@@ -205,7 +206,10 @@
 	        		</div>
 	        		<div class="clear">
 	        			<label for="choose-file">Choose File:</label>
-	        			<input type="file" id="file" class="right" name="choose-file"/>
+	        			<div class="wrapper">
+	        				<input type="text" id="dummy-chart-file">
+	        				<input type="file" id="file" class="right" name="choose-file"/>
+	        			</div>
 	        		</div>
         		</div>
         		<div id="container-wrapper">

@@ -346,6 +346,19 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	border-top: 5px solid #24700C;
 }
 
+#clear-board{
+	cursor: pointer;
+	margin-left: 0!important;
+	margin-bottom: -10px!important;
+	text-indent: 10px;
+	padding: 15px 0;
+	width: 100%;
+}
+
+#clear-board:hover{
+	background: rgba(0, 0, 0, 0.1);
+}
+
 /*End of Menu*/
 
 /*DrawBoard*/
@@ -496,6 +509,7 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	text-indent: 10px;
 	font-weight: bold;
 	padding: 15px 0;
+	position: relative;
 }
 
 #options-menu .back-btn{
@@ -661,6 +675,23 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	width: 55px;
 }
 
+
+#charts-wrapper .wrapper{
+	position: relative;
+	width: 150px;
+	top: -21px;
+	left: 110px;
+	height: 22px;
+	overflow: hidden;
+}
+
+#file{
+	top: -34px!important;
+	left: 1px;
+	width: 300px!important;
+	opacity: 0;
+}
+
 #charts-panel .save-button{
 	right:10px;
 }
@@ -669,6 +700,7 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 	clear: both;
 	height: 0px;
 	overflow: hidden;
+	position: relative;
 }
 
 .remove-button{
@@ -703,3 +735,5 @@ ul > li:first-child{ border-top: 5px solid #24700C; }
 #export .export-item a:active{
 	background: rgb(107, 5, 5);;
 }
+
+#tmp1{ border:none; }
