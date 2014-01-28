@@ -553,6 +553,9 @@
                     $('.remove-wrapper').css('height', 0);
                     $('#imgLoader').val("");
                     $('#img-path').val(""); //From Image Menu
+                    setTimeout(function() {
+                        $('.dummy-imgLoader').removeClass('hide');
+                    }, 500);
 
                 });
             },
